@@ -49,6 +49,12 @@ a {
 img {
     max-width: 100%;
     height: auto;
+    image-rendering: -webkit-optimize-contrast; /* Mejora la nitidez en webkit */
+    image-rendering: crisp-edges; /* Mejora la nitidez en general */
+    transform: translateZ(0); /* Activa la aceleración por hardware */
+    -webkit-backface-visibility: hidden; /* Evita problemas de renderizado */
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 /* Clase de utilidad para contenedores */
@@ -701,5 +707,102 @@ img {
     }
     .nav__list {
         gap: 3rem;
+    }
+}
+
+/* ==================== SECCIÓN AFICHES PROMOCIONALES ==================== */
+.promotional-section {
+    background-color: var(--color-white);
+    padding: 4rem 0;
+    overflow: hidden;
+}
+
+.promotional-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.promotional-header .section__title {
+    margin-bottom: 0;
+    text-align: left;
+}
+
+.promotional__card {
+    background: var(--color-white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    transform: scale(0.85);
+}
+
+.swiper-slide-active .promotional__card {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.swiper-slide-prev .promotional__card,
+.swiper-slide-next .promotional__card {
+    transform: scale(0.9);
+}
+
+.promotional__image {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: contain;
+    display: block;
+    background-color: var(--color-secondary);
+}
+
+/* Ajustes específicos para el carrusel promocional */
+.promotional-carousel {
+    padding: 20px 0 60px;
+    position: relative;
+}
+
+.promotional-carousel .swiper-slide {
+    transition: transform 0.5s ease;
+}
+
+/* Contenedor de paginación centrado */
+.promotional-carousel .swiper-pagination {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto !important;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+
+.promotional-carousel .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: var(--color-primary);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.promotional-carousel .swiper-pagination-bullet-active {
+    opacity: 1;
+    width: 20px;
+    border-radius: 5px;
+}
+
+/* Ajustes responsivos */
+@media screen and (max-width: 768px) {
+    .promotional-carousel {
+        padding: 10px 0 50px;
+    }
+    
+    .promotional__card {
+        transform: scale(0.9);
+    }
+    
+    .swiper-slide-active .promotional__card {
+        transform: scale(1.15);
     }
 }
