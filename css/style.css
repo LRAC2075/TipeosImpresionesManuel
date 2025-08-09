@@ -152,6 +152,17 @@ img {
         align-items: center;
         justify-content: center;
     }
+
+    /* 1. Hacemos que el grid de 2 columnas se convierta en 1 sola */
+    .about__grid {
+        grid-template-columns: 1fr; /* Cambia a una sola columna */
+    }
+
+    /* 2. Centramos la imagen dentro de su contenedor */
+    .about__image {
+        display: flex;
+        justify-content: center;
+    }
 }
 .nav__list {
     display: flex;
@@ -753,6 +764,10 @@ img {
         grid-template-columns: 1.5fr 1fr;
         gap: 5rem;
         text-align: left;
+    }
+    .about__image {
+        display: flex;
+        justify-content: center;
     }
 }
 
