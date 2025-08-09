@@ -269,24 +269,24 @@ img {
     padding: 4rem 0; /* Padding vertical general */
 }
 
-/* Contenedor del Título y los Controles */
+/* Contenedor del Título */
 .services-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem; /* Espacio entre la cabecera y el carrusel */
+    margin-bottom: 2rem;
 }
 
 /* Quitamos el margen inferior por defecto del título para alinearlo bien */
 .services-header .section__title {
     margin-bottom: 0;
-    text-align: left; /* Alineamos el título a la izquierda */
 }
 
 /* Contenedor para los botones de flecha */
-.swiper-controls {
+.services-carousel .swiper-controls {
+    position: absolute;
+    top: -60px;
+    right: 0;
     display: flex;
-    gap: 0.5rem; /* Espacio entre los dos botones */
+    gap: 0.5rem;
+    z-index: 10;
 }
 
 /* Estilo de los botones (ahora no necesitan posicionamiento absoluto) */
@@ -760,22 +760,25 @@ img {
 .promotional-carousel {
     padding: 20px 0 60px;
     position: relative;
+    overflow: hidden;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .promotional-carousel .swiper-slide {
     transition: transform 0.5s ease;
 }
 
-/* Contenedor de paginación centrado */
-.promotional-carousel .swiper-pagination {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto !important;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 20px;
-    padding: 5px 15px;
+/* Ajustes para el contenedor del carrusel */
+.promotional-carousel {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+/* Ajuste para el contenedor de slides */
+.promotional-carousel .swiper-wrapper {
+    padding-bottom: 10px;
 }
 
 .promotional-carousel .swiper-pagination-bullet {
@@ -799,10 +802,17 @@ img {
     }
     
     .promotional__card {
-        transform: scale(0.9);
+        transform: scale(0.85);
     }
     
     .swiper-slide-active .promotional__card {
-        transform: scale(1.15);
+        transform: scale(1.05);
+    }
+    
+    .promotional__image {
+        max-height: 70vh;
+        height: 60vw;
+        width: auto;
+        margin: 0 auto;
     }
 }

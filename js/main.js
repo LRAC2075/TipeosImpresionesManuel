@@ -65,10 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==================== LÓGICA: CARRUSEL DE SERVICIOS ==================== */
     const servicesCarousel = new Swiper('.services-carousel', {
         loop: true,
-        centeredSlides: true,
+        centeredSlides: false,
+        speed: 6000,
         autoplay: {
-            delay: 5000,
+            delay: 0,
             disableOnInteraction: false,
+            pauseOnMouseEnter: true,
         },
         pagination: {
             el: '.services-carousel .swiper-pagination',
@@ -96,8 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ==================== LÓGICA: CARRUSEL DE AFICHES PROMOCIONALES ==================== */
     const promotionalCarousel = new Swiper('.promotional-carousel', {
-        slidesPerView: 1.2,
-        spaceBetween: 20,
+        slidesPerView: 1,
+        spaceBetween: 10,
         centeredSlides: true,
         loop: true,
         loopedSlides: 8,
@@ -105,31 +107,44 @@ document.addEventListener('DOMContentLoaded', () => {
         autoplay: {
             delay: 3000,
             disableOnInteraction: false,
-            pauseOnMouseEnter: true
+            pauseOnMouseEnter: true,
+            waitForTransition: true
         },
+        watchSlidesProgress: true,
+        observer: true,
+        observeParents: true,
+        pagination: false,
         effect: 'coverflow',
         coverflowEffect: {
             rotate: 0,
             stretch: 0,
-            depth: 100,
-            modifier: 1.5,
+            depth: 20,
+            modifier: 0.6,
             slideShadows: false,
         },
         breakpoints: {
-            768: {
-                slidesPerView: 3,
-                spaceBetween: 30,
+            480: {
+                slidesPerView: 1.5,
+                spaceBetween: 15,
                 coverflowEffect: {
-                    depth: 150,
-                    modifier: 2,
+                    depth: 50,
+                    modifier: 1,
+                }
+            },
+            768: {
+                slidesPerView: 2.2,
+                spaceBetween: 20,
+                coverflowEffect: {
+                    depth: 100,
+                    modifier: 1.2,
                 }
             },
             1024: {
-                slidesPerView: 3,
-                spaceBetween: 40,
+                slidesPerView: 2.8,
+                spaceBetween: 30,
                 coverflowEffect: {
-                    depth: 200,
-                    modifier: 2.5,
+                    depth: 150,
+                    modifier: 1.5,
                 }
             }
         },
