@@ -166,4 +166,81 @@ document.addEventListener('DOMContentLoaded', () => {
             img.style.opacity = '1';
         });
     });
+
+    // Función para mostrar notificaciones personalizadas
+    function showNotification(message, isError = false) {
+        // Crear el elemento de notificación
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        
+        // Crear el contenido de la notificación
+        notification.innerHTML = `
+            <div class="notification__icon">
+                ${isError 
+                    ? '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>'
+                    : '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>'
+                }
+            </div>
+            <p class="notification__message">${message}</p>
+            <button class="notification__close">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        `;
+        
+        // Agregar la notificación al DOM
+        document.body.appendChild(notification);
+        
+        // Mostrar la notificación con animación
+        setTimeout(() => notification.classList.add('show'), 10);
+        
+        // Configurar el botón de cerrar
+        const closeButton = notification.querySelector('.notification__close');
+        closeButton.addEventListener('click', () => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        });
+        
+        // Auto-cerrar después de 5 segundos
+        setTimeout(() => {
+            if (document.body.contains(notification)) {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }
+        }, 5000);
+    }
+
+    // Función para manejar el envío del formulario
+    function handleSubmit(e) {
+        e.preventDefault();
+        
+        // Obtener los valores del formulario
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        try {
+            // Construir el cuerpo del correo
+            const body = `Nombre: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMensaje:%0D%0A${message}`;
+            const subject = `Contacto desde la web - ${name}`;
+            
+            // Abrir directamente en Gmail
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=samuelimpresiones2025@gmail.com&su=${encodeURIComponent(subject)}&body=${body}`;
+            window.open(gmailUrl, '_blank');
+            
+            // Mostrar mensaje de confirmación
+            showNotification('¡Gracias por tu mensaje! Se abrirá tu cliente de correo para enviar los detalles.');
+            
+            // Limpiar el formulario
+            document.getElementById('contactForm').reset();
+        } catch (error) {
+            console.error('Error al enviar el formulario:', error);
+            showNotification('Hubo un error al intentar abrir tu cliente de correo. Por favor, intenta nuevamente.', true);
+        }
+    }
+
+    // Agregar el event listener al formulario
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', handleSubmit);
+    }
 });

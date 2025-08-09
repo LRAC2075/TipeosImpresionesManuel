@@ -646,6 +646,58 @@ img {
     transform: translateY(0);
 }
 
+/* ==================== NOTIFICACIÓN PERSONALIZADA ==================== */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.notification__icon {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.notification__message {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.notification__close {
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    color: var(--color-white);
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.notification__close:hover {
+    opacity: 1;
+}
+
 /* ==================== MEDIA QUERIES (PARA DESKTOPS) ====================
    Ajustes responsivos para pantallas más grandes,
    principalmente cambios en layout y tamaños
